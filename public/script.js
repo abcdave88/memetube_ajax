@@ -12,6 +12,15 @@ function getVideo(){
 
 
 function createVideo(){
- console.log(testicles)
+ $.ajax({
+  type: 'POST',
+  url: '/videos'
+  dataType: 'json'
+ }).done(function(data){
+  console.log('fuuuuuuck')
+ })
 }
 
+
+//event listeners
+$('.submit').on('click', createVideo)
