@@ -5,7 +5,8 @@ function getVideo(){
     type: 'GET',
     url: '/videos',
     dataType: 'json'
-  }).done(data){
+  }).done(function(data){
+    console.log('i shot the sherrif')
 
   })//end of .done
 }//end of getVideo

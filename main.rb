@@ -13,3 +13,15 @@ get "/videos" do
   @videos = run_sql(sql)
   erb :index
 end
+
+private
+
+def run_sql(sql)
+  conn = PG.connect(dbname: 'memetube', host: 'localhost')
+  begin
+    result = conn.exec(sql)
+  ensure
+    conn.close
+  end
+  result
+end
