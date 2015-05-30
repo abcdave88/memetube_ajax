@@ -23,13 +23,27 @@ get "/videos/new" do
 end
 
 post "/index" do
-  binding.pry
-   sql = "UPDATE videos SET  title=#{sql_string(title)}, description=#{sql_string(description)}, url='#{url}' , genre='#{genre}' WHERE id='#{params[:id]}';"
-   run_sql(sql)
-   # redirect to ('/index')
+  title = params[:title]
+  description = params[:description]
+  url = params[:url]
+  genre = params[:genre]
+  sql = "INSERT INTO videos ( title, description, genre, url, views) VALUES (#{sql_string(title)}, #{sql_string(description)}, '#{genre}', '#{url}', 0);"
+  @video = run_sql(sql)   # sql = "UPDATE videos SET  title=#{sql_string(title)}, description=#{sql_string(description)}, url='#{url}', genre='#{genre}' WHERE id='#{params[:id]}';"
+    # binding.pry
+   # redirect to ('/')
 end
 
+get "/videos/:id" do
+  sql = "UPDATE videos SET views=(views + 1) WHERE id='#{params[:id]}';"
+  run_sql(sql)
+  sql = "SELECT * FROM videos WHERE id=#{params[:id]}"
+  @video = run_sql(sql).first
+  erb :show
+end
 
+def sql_string(value)
+  "'#{value.gsub("'", "''")}'"  
+end
 private
 
 def run_sql(sql)
