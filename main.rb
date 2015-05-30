@@ -22,12 +22,13 @@ get "/videos/new" do
   erb :new
 end
 
-post "/videos" do
-   # sql = "UPDATE videos SET  title=#{sql_string(title)}, description=#{sql_string(description)}, url='#{url}' , genre='#{genre}' WHERE id='#{params[:id]}';"
-   # run_sql(sql)
-   # @video = 
-   redirect to ('/index')
+post "/index" do
+  binding.pry
+   sql = "UPDATE videos SET  title=#{sql_string(title)}, description=#{sql_string(description)}, url='#{url}' , genre='#{genre}' WHERE id='#{params[:id]}';"
+   run_sql(sql)
+   # redirect to ('/index')
 end
+
 
 private
 

@@ -3,6 +3,7 @@ function getVideo(){
   $.ajax({
     type: 'GET',
     url: '/videos',
+    data: {title: title, description: description, url: url, genre: genre},
     dataType: 'json'
   }).done(function(data){
     console.log('i shot the sherrif')
@@ -12,9 +13,14 @@ function getVideo(){
 
 
 function createVideo(){
+  var title = $('#title').val();
+  var description = $('#description').val();
+  var url = $('#url').val();
+  var genre =$('#genre').val();
  $.ajax({
   type: 'POST',
   url: '/videos'
+  data: {title: title, description: description, url: url, genre: genre},
   dataType: 'json'
  }).done(function(data){
   console.log('fuuuuuuck')
