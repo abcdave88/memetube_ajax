@@ -1,5 +1,4 @@
 function getVideo(){
-  console.log('videoKIlledTheRadioStar')
   //ajax request
   $.ajax({
     type: 'GET',
@@ -10,3 +9,9 @@ function getVideo(){
 
   })//end of .done
 }//end of getVideo
+
+
+function createVideo(){
+ console.log(testicles)
+}
+

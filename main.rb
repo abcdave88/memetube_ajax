@@ -11,7 +11,22 @@ end
 get "/videos" do
   sql =  "select * from videos"
   @videos = run_sql(sql)
-  erb :index
+  if request.xhr?
+    json @videos.to_a
+  else
+    erb :index
+  end
+end
+
+get "/videos/new" do
+  erb :new
+end
+
+post "/videos" do
+   # sql = "UPDATE videos SET  title=#{sql_string(title)}, description=#{sql_string(description)}, url='#{url}' , genre='#{genre}' WHERE id='#{params[:id]}';"
+   # run_sql(sql)
+   # @video = 
+   redirect to ('/index')
 end
 
 private
