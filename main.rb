@@ -42,7 +42,7 @@ get "/videos/:id" do
   sql = "SELECT * FROM videos WHERE id=#{params[:id]}"
   @video = run_sql(sql).first
   if request.xhr?
-    json @video.to_a
+    json [{status: :ok}]
   else
    erb :show
   end
