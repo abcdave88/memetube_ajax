@@ -1,6 +1,6 @@
 function appendNewItem(data){
   $('<li class="'+ (data.done == 't' ? "completed" : "") + '">'+
-    '<input class="toggle" type="checkbox" data-id="'+ data.id +'" '+ (data.done == 't' ? 'checked="checked"' : "") + '>'+
+    '<input type="checkbox" data-id="'+ data.id +'" '+ (data.done == 't' ? 'checked="checked"' : "") + '>'+
     '<label>'+ data.title +'</label>'+
     '<button class="destroy" data-id="'+ data.id +'"></button>'+
     '</li>').prependTo("#todo-list")
@@ -36,9 +36,13 @@ function createVideo(){
   data: {title: title, description: description, url: url, genre: genre},
   dataType: 'json'
  }).done(function(data){
+  appendNewItem;
   console.log('fuuuuuuck')
  })
 }
+
+
+
 
 
 //event listeners

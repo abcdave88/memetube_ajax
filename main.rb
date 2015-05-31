@@ -28,9 +28,12 @@ post "/index" do
   url = params[:url]
   genre = params[:genre]
   sql = "INSERT INTO videos ( title, description, genre, url, views) VALUES (#{sql_string(title)}, #{sql_string(description)}, '#{genre}', '#{url}', 0);"
-  @video = run_sql(sql)   # sql = "UPDATE videos SET  title=#{sql_string(title)}, description=#{sql_string(description)}, url='#{url}', genre='#{genre}' WHERE id='#{params[:id]}';"
-    # binding.pry
-   # redirect to ('/')
+  @video = run_sql(sql) 
+  if request.xhr?
+    json @video 
+  else
+   redirect to ('/')
+  end
 end
 
 get "/videos/:id" do
@@ -38,8 +41,35 @@ get "/videos/:id" do
   run_sql(sql)
   sql = "SELECT * FROM videos WHERE id=#{params[:id]}"
   @video = run_sql(sql).first
-  erb :show
+  if request.xhr?
+    json @video.to_a
+  else
+   erb :show
+  end
 end
+
+
+
+get "/videos/:id/delete" do
+  sql = "DELETE FROM videos where id=#{params[:id]}"
+  run_sql(sql)
+  redirect to("/videos")
+end
+
+get '/items/:id/delete' do
+  sql = "delete from videos where id=#{params[:id]}"
+  run_sql(sql)
+  if request.xhr?
+    json [{status: :ok}]
+  else 
+    redirect_to '/videos'
+  end
+end
+
+
+
+
+
 
 def sql_string(value)
   "'#{value.gsub("'", "''")}'"  
