@@ -18,7 +18,7 @@ get "/videos" do
   end
 end
 
-get "/videos/new" do
+get "/new" do
   erb :new
 end
 
@@ -47,8 +47,6 @@ get "/videos/:id" do
    erb :show
   end
 end
-
-
 
 get "/videos/:id/delete" do
   sql = "DELETE FROM videos where id=#{params[:id]}"

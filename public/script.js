@@ -19,7 +19,7 @@ function getVideo(){
       $.each(data, function(index, item){
       appendNewItem(item);
     })
-    )
+    
 
   })//end of .done
 }//end of getVideo
@@ -43,7 +43,13 @@ function createVideo(){
 
 
 
+$(document).ready(function(){
+
+  //event listeners
+
+  $('.submit').on('click', createVideo);
+
+});//end of document ready
 
 
-//event listeners
-$('.submit').on('click', createVideo)
+
